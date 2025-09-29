@@ -134,3 +134,50 @@ data.main.temp      → temperature (°C)
 data.main.humidity  → humidity (%)
 data.wind.speed     → wind speed (m/s)
 */
+// Add event for Dammam Weather Now
+window.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("t1-msg").innerHTML = "Hello, World!";
+    const t2Btn = document.getElementById("t2-btn");
+    if (t2Btn) {
+        t2Btn.addEventListener("click", function () {
+            document.getElementById("t2-status").innerHTML = "You clicked the button!";
+        });
+    }
+    const t3Btn = document.getElementById("t3-loadQuote");
+    if (t3Btn) {
+        t3Btn.addEventListener("click", function () {
+            fetch("https://dummyjson.com/quotes/random")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("t3-quote").innerHTML = data.quote;
+                    document.getElementById("t3-author").innerHTML = data.author;
+                })
+                .catch(() => {
+                    document.getElementById("t3-quote").innerHTML = "Could not load quote.";
+                    document.getElementById("t3-author").innerHTML = "";
+                });
+        });
+    }
+
+    const t4Btn = document.getElementById("t4-loadWx");
+    if (t4Btn) {
+        t4Btn.addEventListener("click", function () {
+            const apiKey ="84f1434e9a1defdf812fd33abe59d514"; 
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=Dammam&appid=${apiKey}&units=metric`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("t4-temp").innerHTML = data.main.temp + " °C";
+                    document.getElementById("t4-hum").innerHTML = data.main.humidity + " %";
+                    document.getElementById("t4-wind").innerHTML = data.wind.speed + " m/s";
+                    document.getElementById("t4-err").innerHTML = "";
+                })
+                .catch((err) => {
+                    document.getElementById("t4-err").innerHTML = "Could not load weather data.";
+                    document.getElementById("t4-temp").innerHTML = "—";
+                    document.getElementById("t4-hum").innerHTML = "—";
+                    document.getElementById("t4-wind").innerHTML = "—";
+                });
+        });
+    }
+});
