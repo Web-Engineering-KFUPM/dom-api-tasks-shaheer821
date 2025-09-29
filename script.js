@@ -44,6 +44,16 @@ button.addEventListener("click", function () {
     // change text here
 });
 */
+// Set welcome message and add button event when page loads
+window.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("t1-msg").innerHTML = "Hello, World!";
+    const t2Btn = document.getElementById("t2-btn");
+    if (t2Btn) {
+        t2Btn.addEventListener("click", function () {
+            document.getElementById("t2-status").innerHTML = "You clicked the button!";
+        });
+    }
+});
  
 
 /*  
