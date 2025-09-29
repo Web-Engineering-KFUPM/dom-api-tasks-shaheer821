@@ -82,6 +82,32 @@ Use:
 data.content   // the quote text
 data.author    // the author
 */
+// Add event for Inspiring Quote Board
+window.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("t1-msg").innerHTML = "Hello, World!";
+    const t2Btn = document.getElementById("t2-btn");
+    if (t2Btn) {
+        t2Btn.addEventListener("click", function () {
+            document.getElementById("t2-status").innerHTML = "You clicked the button!";
+        });
+    }
+
+    const t3Btn = document.getElementById("t3-loadQuote");
+    if (t3Btn) {
+        t3Btn.addEventListener("click", function () {
+            fetch("https://dummyjson.com/quotes/random")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("t3-quote").innerHTML = data.quote;
+                    document.getElementById("t3-author").innerHTML = data.author;
+                })
+                .catch(() => {
+                    document.getElementById("t3-quote").innerHTML = "Could not load quote.";
+                    document.getElementById("t3-author").innerHTML = "";
+                });
+        });
+    }
+});
  
 
 /*  
